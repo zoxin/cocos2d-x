@@ -67,6 +67,7 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     private Cocos2dxWebViewHelper mWebViewHelper = null;
     private Cocos2dxEditBoxHelper mEditBoxHelper = null;
     private boolean hasFocus = false;
+    private boolean showVirtualButton = false;
 
     public Cocos2dxGLSurfaceView getGLSurfaceView(){
         return  mGLSurfaceView;
@@ -85,7 +86,11 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
             }
         });
     }
-    
+
+    public void setEnableVirtualButton(boolean value) {
+        this.showVirtualButton = value;
+    }
+
     protected void onLoadNativeLibraries() {
         try {
             ApplicationInfo ai = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
@@ -275,6 +280,9 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
     }
 
     protected void hideVirtualButton() {
+        if (showVirtualButton) {
+            return;
+        }
 
         if (Build.VERSION.SDK_INT >= 19) {
             // use reflection to remove dependence of API level
@@ -351,6 +359,17 @@ public abstract class Cocos2dxActivity extends Activity implements Cocos2dxHelpe
                     EGL10.EGL_STENCIL_SIZE, mConfigAttributes[5],
                     EGL10.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
                     EGL10.EGL_NONE
+                },
+                {
+                     // GL ES 2 with user set
+                     EGL10.EGL_RED_SIZE, mConfigAttributes[0],
+                     EGL10.EGL_GREEN_SIZE, mConfigAttributes[1],
+                     EGL10.EGL_BLUE_SIZE, mConfigAttributes[2],
+                     EGL10.EGL_ALPHA_SIZE, mConfigAttributes[3],
+                     EGL10.EGL_DEPTH_SIZE, mConfigAttributes[4] >= 24 ? 16 : mConfigAttributes[4],
+                     EGL10.EGL_STENCIL_SIZE, mConfigAttributes[5],
+                     EGL10.EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+                     EGL10.EGL_NONE
                 },
                 {
                     // GL ES 2 by default
