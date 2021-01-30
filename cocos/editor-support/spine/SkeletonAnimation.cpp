@@ -28,9 +28,9 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/SkeletonAnimation.h>
-#include <spine/spine-cocos2dx.h>
-#include <spine/extension.h>
+#include "spine/SkeletonAnimation.h"
+#include "spine/spine-cocos2dx.h"
+#include "spine/extension.h"
 #include <algorithm>
 
 USING_NS_CC;
@@ -114,8 +114,6 @@ void SkeletonAnimation::initialize () {
 	_state = spAnimationState_create(spAnimationStateData_create(_skeleton->data));
 	_state->rendererObject = this;
 	_state->listener = animationCallback;
-
-	_spAnimationState* stateInternal = (_spAnimationState*)_state;
 }
 
 SkeletonAnimation::SkeletonAnimation ()

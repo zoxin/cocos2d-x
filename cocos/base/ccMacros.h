@@ -2,7 +2,8 @@
 Copyright (c) 2008-2010 Ricardo Quesada
 Copyright (c) 2010-2012 cocos2d-x.org
 Copyright (c) 2011      Zynga Inc.
-Copyright (c) 2013-2017 Chukong Technologies Inc.
+Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
 
 http://www.cocos2d-x.org
 
@@ -275,7 +276,7 @@ CC_ASSERT(__gl_error_code == GL_NO_ERROR, "Error"); \
  /*********************************/
  /** 64bits Program Sense Macros **/
  /*********************************/
-#if defined(_M_X64) || defined(_WIN64) || defined(__LP64__) || defined(_LP64) || defined(__x86_64)
+#if defined(_M_X64) || defined(_WIN64) || defined(__LP64__) || defined(_LP64) || defined(__x86_64) || defined(__arm64__) || defined(__aarch64__)
 #define CC_64BITS 1
 #else
 #define CC_64BITS 0
@@ -296,6 +297,9 @@ CC_ASSERT(__gl_error_code == GL_NO_ERROR, "Error"); \
   #endif
 #else
   #include <sys/param.h>
+  #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    #include <sys/endian.h>
+  #endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
   #if ((defined(__LITTLE_ENDIAN__) && !defined(__BIG_ENDIAN__)) || \
          (defined(__BYTE_ORDER) && __BYTE_ORDER == __LITTLE_ENDIAN)) 
     #define CC_LITTLE_ENDIAN 1

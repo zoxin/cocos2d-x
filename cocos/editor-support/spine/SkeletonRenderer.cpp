@@ -28,12 +28,12 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/SkeletonRenderer.h>
-#include <spine/extension.h>
-#include <spine/SkeletonBatch.h>
-#include <spine/SkeletonTwoColorBatch.h>
-#include <spine/AttachmentVertices.h>
-#include <spine/Cocos2dAttachmentLoader.h>
+#include "spine/SkeletonRenderer.h"
+#include "spine/extension.h"
+#include "spine/SkeletonBatch.h"
+#include "spine/SkeletonTwoColorBatch.h"
+#include "spine/AttachmentVertices.h"
+#include "spine/Cocos2dAttachmentLoader.h"
 #include <algorithm>
 
 USING_NS_CC;
@@ -224,8 +224,8 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 				trianglesTwoColor.indexCount = attachmentVertices->_triangles->indexCount;
 				trianglesTwoColor.verts = twoColorBatch->allocateVertices(attachmentVertices->_triangles->vertCount);
 				trianglesTwoColor.vertCount = attachmentVertices->_triangles->vertCount;
-				for (int i = 0; i < trianglesTwoColor.vertCount; i++) {
-					trianglesTwoColor.verts[i].texCoords = attachmentVertices->_triangles->verts[i].texCoords;
+				for (int ii = 0; ii < trianglesTwoColor.vertCount; ii++) {
+					trianglesTwoColor.verts[ii].texCoords = attachmentVertices->_triangles->verts[ii].texCoords;
 				}
 				spRegionAttachment_computeWorldVertices(attachment, slot->bone, (float*)trianglesTwoColor.verts, 0, 7);
 			}
@@ -253,8 +253,8 @@ void SkeletonRenderer::draw (Renderer* renderer, const Mat4& transform, uint32_t
 				trianglesTwoColor.indexCount = attachmentVertices->_triangles->indexCount;
 				trianglesTwoColor.verts = twoColorBatch->allocateVertices(attachmentVertices->_triangles->vertCount);
 				trianglesTwoColor.vertCount = attachmentVertices->_triangles->vertCount;
-				for (int i = 0; i < trianglesTwoColor.vertCount; i++) {
-					trianglesTwoColor.verts[i].texCoords = attachmentVertices->_triangles->verts[i].texCoords;
+				for (int ii = 0; ii < trianglesTwoColor.vertCount; ii++) {
+					trianglesTwoColor.verts[ii].texCoords = attachmentVertices->_triangles->verts[ii].texCoords;
 				}
 				spVertexAttachment_computeWorldVertices(SUPER(attachment), slot, 0, trianglesTwoColor.vertCount * sizeof(V3F_C4B_C4B_T2F) / 4, (float*)trianglesTwoColor.verts, 0, 7);
 			}

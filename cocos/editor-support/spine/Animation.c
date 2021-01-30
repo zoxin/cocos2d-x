@@ -28,10 +28,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-#include <spine/Animation.h>
-#include <spine/IkConstraint.h>
+#include "spine/Animation.h"
+#include "spine/IkConstraint.h"
 #include <limits.h>
-#include <spine/extension.h>
+#include "spine/extension.h"
 
 spAnimation* spAnimation_create (const char* name, int timelinesCount) {
 	spAnimation* self = NEW(spAnimation);
@@ -745,7 +745,7 @@ void _spAttachmentTimeline_apply (const spTimeline* timeline, spSkeleton* skelet
 	spSlot* slot = skeleton->slots[self->slotIndex];
 
 	if (direction == SP_MIX_DIRECTION_OUT && pose == SP_MIX_POSE_SETUP) {
-		const char* attachmentName = slot->data->attachmentName;
+        attachmentName = slot->data->attachmentName;
         spSlot_setAttachment(slot, attachmentName ? spSkeleton_getAttachmentForSlotIndex(skeleton, self->slotIndex, attachmentName) : 0);
 		return;
 	}
